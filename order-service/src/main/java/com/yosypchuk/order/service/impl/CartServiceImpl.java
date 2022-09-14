@@ -46,18 +46,16 @@ public class CartServiceImpl implements CartService {
     @Override
     public Cart getCartByUserId(Long userId) {
         log.info("Get cart by user id: {}", userId);
-        Cart cart = cartRepository.findCartByUserId(userId)
-                .orElse(null);
 
-        return cart;
+        return cartRepository.findCartByUserId(userId)
+                .orElseThrow(() -> new EntityNotFoundException("Cart doesn't exist!"));
     }
 
     @Override
     public Cart getCartById(Long id) {
         log.info("Get cart by id: {}", id);
-        Cart cart = cartRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Cart doesn't exist!"));
 
-        return cart;
+        return cartRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Cart doesn't exist!"));
     }
 }

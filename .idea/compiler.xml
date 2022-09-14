@@ -8,12 +8,11 @@
         <outputRelativeToContentRoot value="true" />
         <module name="config-server" />
         <module name="authentication-service" />
-        <module name="payment-service" />
-        <module name="euruka-server" />
         <module name="api-gateway" />
         <module name="order-service" />
         <module name="mail-service" />
         <module name="wishlist-service" />
+        <module name="eureka-server" />
       </profile>
       <profile name="Annotation profile for microservices" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
@@ -40,7 +39,7 @@
       <module name="auth-service" options="-parameters" />
       <module name="authentication-service" options="-parameters" />
       <module name="config-server" options="-parameters" />
-      <module name="euruka-server" options="-parameters" />
+      <module name="eureka-server" options="-parameters" />
       <module name="mail-service" options="-parameters" />
       <module name="open-feign-client" options="-parameters" />
       <module name="order-service" options="-parameters" />

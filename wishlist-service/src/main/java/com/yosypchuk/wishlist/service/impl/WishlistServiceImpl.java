@@ -23,7 +23,7 @@ public class WishlistServiceImpl implements WishlistService {
     @Transactional
     @Override
     public Wishlist createWishlist(Long userId) {
-        log.info("");
+        log.info("Trying to get wishlist for user with id: {}", userId);
         Optional<Wishlist> possibleWishlist = wishlistRepository.findWishlistByUserId(userId);
 
         if(possibleWishlist.isPresent()) {

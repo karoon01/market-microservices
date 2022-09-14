@@ -76,6 +76,10 @@ public class WishlistItemServiceImpl implements WishlistItemService {
 
     @Override
     public void removeAllWishlistItems(Long wishlistId) {
+        log.info("Get wishlist by id: {}", wishlistId);
+        wishlistItemRepository.findById(wishlistId)
+                        .orElseThrow(() -> new EntityNotFoundException("Wishlist doesn't exist!"));
+
         log.info("Remove all wishlist items from wishlist with id: {}", wishlistId);
         wishlistItemRepository.removeAllWishlistItemsFromWishlist(wishlistId);
     }

@@ -32,8 +32,8 @@ public class CartController implements CartApi {
     }
 
     @Override
-    public ResponseEntity<Void> addItemToCart(Long userId, CartItemRequest cartItemRequest) {
-        cartItemService.addCartItem(userId, cartItemRequest);
+    public ResponseEntity<Void> addItemToCart(Long userId, Long productId) {
+        cartItemService.addCartItem(userId, productId);
         return ResponseEntity.noContent().build();
     }
 

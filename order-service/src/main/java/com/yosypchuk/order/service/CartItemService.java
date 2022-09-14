@@ -5,7 +5,7 @@ import com.yosypchuk.order.model.dto.CartItemRequest;
 
 public interface CartItemService {
 
-    void addCartItem(Long userId, CartItemRequest cartItemRequest);
+    void addCartItem(Long userId, Long productId);
 
     CartItem getCartItemById(Long cartItemId);
 

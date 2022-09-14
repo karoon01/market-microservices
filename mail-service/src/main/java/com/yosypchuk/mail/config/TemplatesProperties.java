@@ -9,7 +9,6 @@ import java.util.List;
 @Data
 @Configuration
 public class TemplatesProperties {
-
     private List<Template> templates;
 
     @Data

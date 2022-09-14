@@ -7,6 +7,7 @@ import com.yosypchuk.order.model.CartItem;
 import com.yosypchuk.order.model.dto.CartItemRequest;
 import com.yosypchuk.order.model.dto.ProductDTO;
 import com.yosypchuk.order.repository.CartItemRepository;
+import com.yosypchuk.order.repository.CartRepository;
 import com.yosypchuk.order.service.CartItemService;
 import com.yosypchuk.order.service.CartService;
 import lombok.RequiredArgsConstructor;
@@ -20,22 +21,20 @@ import org.springframework.transaction.annotation.Transactional;
 public class CartItemServiceImpl implements CartItemService {
 
     private final CartService cartService;
+    private final CartRepository cartRepository;
     private final CartItemRepository cartItemRepository;
     private final ProductFeignClient productClient;
 
     @Transactional
     @Override
-    public void addCartItem(Long userId, CartItemRequest cartItemRequest) {
-        Long productId = cartItemRequest.getProductId();
-
+    public void addCartItem(Long userId, Long productId) {
         log.info("Get cart by user id: {}", userId);
-        Cart cart = cartService.getCartByUserId(userId);
+        Cart cart = cartRepository.findCartByUserId(userId)
+                .orElse(null);
 
         if(cart == null) {
             log.info("Create cart for user with id: {}", userId);
-            cartService.createCart(userId);
-
-            cart = cartService.getCartByUserId(userId);
+            cart = cartService.createCart(userId);
         }
 
         ProductDTO product = productClient.getProduct(productId);
@@ -71,10 +70,9 @@ public class CartItemServiceImpl implements CartItemService {
     @Override
     public CartItem getCartItemById(Long cartItemId) {
         log.info("Get cartItem by id: {}", cartItemId);
-        CartItem cartItem = cartItemRepository.findById(cartItemId)
-                .orElseThrow(() -> new EntityNotFoundException("CartItem doesn't exist!"));
 
-        return cartItem;
+        return cartItemRepository.findById(cartItemId)
+                .orElseThrow(() -> new EntityNotFoundException("CartItem doesn't exist!"));
     }
 
     @Transactional
@@ -90,6 +88,10 @@ public class CartItemServiceImpl implements CartItemService {
 
     @Override
     public void deleteAllCartItems(Long cartId) {
+        log.info("Get Cart by id: {}", cartId);
+        cartRepository.findById(cartId)
+                .orElseThrow(() -> new EntityNotFoundException("Cart doesn't exist!"));
+
         log.info("Delete all CartItem's for cart with id: {}", cartId);
         cartItemRepository.deleteAllCartItemsByCartId(cartId);
     }

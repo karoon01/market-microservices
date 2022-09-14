@@ -13,7 +13,6 @@
         <module>wishlist-service</module>
         <module>euruka-server</module>
         <module>config-server</module>
-        <module>payment-service</module>
         <module>authentication-service</module>
     </modules>
 

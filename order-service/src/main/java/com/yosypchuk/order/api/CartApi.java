@@ -43,9 +43,9 @@ public interface CartApi {
 
     @ApiOperation("Add product to cart")
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping("/{userId}/add")
+    @PostMapping("/{userId}/add/{productId}")
     @ApiResponse(code = 201, message = "Created")
-    ResponseEntity<Void> addItemToCart(@PathVariable Long userId, @RequestBody CartItemRequest cartItemRequest);
+    ResponseEntity<Void> addItemToCart(@PathVariable Long userId, @PathVariable Long productId);
 
     @ApiOperation("Remove product from cart")
     @ResponseStatus(HttpStatus.ACCEPTED)

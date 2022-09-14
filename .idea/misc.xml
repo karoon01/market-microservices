@@ -10,6 +10,7 @@
     <option name="ignoredFiles">
       <set>
         <option value="$PROJECT_DIR$/open-feign-client/pom.xml" />
+        <option value="$PROJECT_DIR$/payment-service/pom.xml" />
       </set>
     </option>
   </component>
