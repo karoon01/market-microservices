@@ -1,7 +1,7 @@
 package com.yosypchuk.mail.service.impl;
 
 import com.yosypchuk.mail.service.EmailService;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -10,11 +10,11 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.nio.charset.StandardCharsets;
 
+@RequiredArgsConstructor
 @Service
-@AllArgsConstructor
 public class EmailServiceImpl implements EmailService {
 
-    private JavaMailSender javaMailSender;
+    private final JavaMailSender javaMailSender;
 
     @Override
     public void sendEmail(String subject, String text, String from, String[] to) throws MessagingException {

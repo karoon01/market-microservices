@@ -1,6 +1,8 @@
 package com.yosypchuk.user.model;
 
-public enum Status {
+import java.io.Serializable;
+
+public enum Status implements Serializable {
     BLOCKED,
     UNBLOCKED
 }

@@ -59,7 +59,11 @@ public class UserController implements UserApi {
 
     @Override
     public ResponseEntity<Void> banUser(Long id) {
+        UserDTO user = userService.getUserById(id);
+
         userService.banUser(id);
+        messageSenderService.sendMessage(UserMapper.INSTANCE.mapUser(user), Event.BANNED);
+
         return ResponseEntity.noContent().build();
     }
 

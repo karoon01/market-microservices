@@ -14,5 +14,5 @@ public interface OrderService {
 
     void deleteOrderItemFromOrder(Long orderItemId);
 
-    void addOrderItemToOrder(Long orderId, Long productId);
+    void addOrderItemToOrder(Long orderId, Long productId, Integer amount);
 }

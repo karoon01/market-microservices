@@ -31,6 +31,12 @@ public class OrderController implements OrderApi {
     }
 
     @Override
+    public ResponseEntity<Void> addOrderItemToOrder(Long orderId, Long productId, Integer amount) {
+        orderService.addOrderItemToOrder(orderId, productId, amount);
+        return ResponseEntity.noContent().build();
+    }
+
+    @Override
     public ResponseEntity<Void> deleteOrderItemFromOrder(Long orderItemId) {
         orderService.deleteOrderItemFromOrder(orderItemId);
         return ResponseEntity.noContent().build();

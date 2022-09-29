@@ -1,6 +1,8 @@
 package com.yosypchuk.user.model.message;
 
-public enum Event {
+import java.io.Serializable;
+
+public enum Event implements Serializable {
     CREATED,
     BANNED
 }

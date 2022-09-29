@@ -30,7 +30,7 @@ public class CartItemServiceImpl implements CartItemService {
 
     @Transactional
     @Override
-    public void addCartItem(Long userId, Long productId) {
+    public void addCartItem(Long userId, Long productId, Integer amount) {
         log.info("Get cart by user id: {}", userId);
         Cart cart = cartRepository.findCartByUserId(userId)
                 .orElse(null);
@@ -48,9 +48,10 @@ public class CartItemServiceImpl implements CartItemService {
             for (CartItem cartItem : cart.getCartItems()) {
                 if (product.getId().equals(cartItem.getProductId())) {
                     log.info("Update amount and total price in cart for product: {}", productId);
-                    cartItem.setAmount(cartItem.getAmount() + 1);
+                    cartItem.setAmount(cartItem.getAmount() + amount);
                     cartItem.setPrice(product.getPrice() * cartItem.getAmount());
 
+                    log.info("Save cartItem to database");
                     cartItemRepository.save(cartItem);
 
                     updateTotalPrice(cart);
@@ -66,7 +67,7 @@ public class CartItemServiceImpl implements CartItemService {
                 .cart(cart)
                 .productId(productId)
                 .price(product.getPrice())
-                .amount(1)
+                .amount(amount)
                 .build();
 
         log.info("Save cartItem to database");
@@ -135,6 +136,7 @@ public class CartItemServiceImpl implements CartItemService {
         cartRepository.save(cart);
     }
 
+    @Transactional
     @Override
     public List<CartItem> getAllCartItemsForCart(Long cartId) {
         log.info("Get Cart by id: {}", cartId);

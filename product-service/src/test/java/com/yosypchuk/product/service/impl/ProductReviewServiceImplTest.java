@@ -4,7 +4,7 @@ import com.yosypchuk.product.exception.EntityNotFoundException;
 import com.yosypchuk.product.model.Product;
 import com.yosypchuk.product.model.ProductReview;
 import com.yosypchuk.product.model.dto.ProductRateDTO;
-import com.yosypchuk.product.repository.ProductRateRepository;
+import com.yosypchuk.product.repository.ProductReviewRepository;
 import com.yosypchuk.product.repository.ProductRepository;
 import com.yosypchuk.product.test.util.TestProductDataUtil;
 import com.yosypchuk.product.test.util.TestReviewDataUtil;
@@ -27,7 +27,7 @@ public class ProductReviewServiceImplTest {
     @InjectMocks
     private ProductReviewServiceImpl productRateService;
     @Mock
-    private ProductRateRepository productRateRepository;
+    private ProductReviewRepository productRateRepository;
     @Mock
     private ProductRepository productRepository;
 

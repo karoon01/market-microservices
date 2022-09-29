@@ -99,7 +99,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void addOrderItemToOrder(Long orderId, Long productId) {
+    public void addOrderItemToOrder(Long orderId, Long productId, Integer amount) {
         log.info("Get order by id: {}", orderId);
         Order order = orderRepository.findById(orderId)
                 .orElseThrow(() -> new EntityNotFoundException("Order doesn't exist!"));
@@ -110,7 +110,7 @@ public class OrderServiceImpl implements OrderService {
                 .order(order)
                 .productId(productId)
                 .totalOrderItemPrice(product.getPrice())
-                .amount(1)
+                .amount(amount)
                 .build();
 
         log.info("Save orderItem to database");

@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface CartItemService {
 
-    void addCartItem(Long userId, Long productId);
+    void addCartItem(Long userId, Long productId, Integer amount);
 
     CartItem getCartItemById(Long cartItemId);
 

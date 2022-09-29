@@ -46,7 +46,9 @@ public interface OrderApi {
             @ApiResponse(code = 201, message = "Created"),
             @ApiResponse(code = 404, message = "Not Found")
     })
-    ResponseEntity<Void> addOrderItemToOrder(@PathVariable Long orderId, @PathVariable Long productId);
+    ResponseEntity<Void> addOrderItemToOrder(@PathVariable Long orderId,
+                                             @PathVariable Long productId,
+                                             @RequestParam Integer amount);
 
     @ApiOperation("Delete order item from order")
     @ResponseStatus(HttpStatus.ACCEPTED)

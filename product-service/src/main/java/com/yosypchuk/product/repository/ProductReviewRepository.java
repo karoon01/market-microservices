@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface ProductRateRepository extends JpaRepository<ProductReview, Long> {
+public interface ProductReviewRepository extends JpaRepository<ProductReview, Long> {
 
     @Query("SELECT pr FROM ProductReview pr WHERE pr.userId=?1 AND pr.product.id=?2")
     Optional<ProductReview> findProductRateByUserIdAndProductId(Long userId, Long productId);

@@ -30,6 +30,8 @@ public class ProductDTO {
 
     private List<ProductReview> reviews;
 
+    private Double averageRate;
+
     @Min(value = 0, message = "${product.price.positive}")
     private Double price;
 

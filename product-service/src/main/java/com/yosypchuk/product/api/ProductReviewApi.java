@@ -13,7 +13,7 @@ import javax.validation.Valid;
 
 @Api("Product rate management API")
 @RequestMapping("/product/rate")
-public interface ProductReviewApi {
+public interface  ProductReviewApi {
 
     @ApiOperation("Create product rate")
     @ResponseStatus(HttpStatus.CREATED)

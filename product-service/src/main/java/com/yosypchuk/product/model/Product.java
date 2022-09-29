@@ -38,6 +38,9 @@ public class Product {
     @JsonIgnoreProperties("product")
     private List<ProductReview> reviews;
 
+    @Transient
+    private Double averageRate;
+
     @Column(name = "price", nullable = false)
     private Double price;
 
