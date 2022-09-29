@@ -59,6 +59,10 @@ public interface CartApi {
     @ApiOperation("Remove all products from cart")
     @ResponseStatus(HttpStatus.ACCEPTED)
     @DeleteMapping("/{cartId}/remove/all")
-    @ApiResponse(code = 202, message = "Accepted")
+    @ApiResponses({
+            @ApiResponse(code = 202, message = "Accepted"),
+            @ApiResponse(code = 404, message = "Not Found")
+    })
+
     ResponseEntity<Void> removeAllItemsFromCart(@PathVariable Long cartId);
 }

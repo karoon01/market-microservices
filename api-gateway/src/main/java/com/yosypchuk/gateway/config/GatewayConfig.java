@@ -10,7 +10,6 @@ import org.springframework.context.annotation.Configuration;
 @RequiredArgsConstructor
 @Configuration
 public class GatewayConfig {
-
     private final AuthenticationFilter authenticationFilter;
 
     @Bean

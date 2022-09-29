@@ -1,5 +1,6 @@
 package com.yosypchuk.order.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,6 +22,7 @@ public class OrderItem {
 
     @ManyToOne
     @JoinColumn(name = "user_order_id")
+    @JsonIgnoreProperties("orderItems")
     private Order order;
 
     @Column(name = "product_id", nullable = false)

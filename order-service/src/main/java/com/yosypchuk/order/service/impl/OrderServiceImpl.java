@@ -4,6 +4,8 @@ import com.yosypchuk.order.exception.EntityNotFoundException;
 import com.yosypchuk.order.model.Cart;
 import com.yosypchuk.order.model.Order;
 import com.yosypchuk.order.model.OrderItem;
+import com.yosypchuk.order.model.constatnts.OrderStatus;
+import com.yosypchuk.order.model.dto.ProductDTO;
 import com.yosypchuk.order.repository.OrderItemRepository;
 import com.yosypchuk.order.repository.OrderRepository;
 import com.yosypchuk.order.service.CartService;
@@ -15,6 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 import net.bytebuddy.utility.dispatcher.JavaDispatcher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,6 +30,9 @@ public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
     private final OrderItemRepository orderItemRepository;
     private final CartService cartService;
+    private final RestTemplate restTemplate;
+
+    private final static String GET_PRODUCT_URL = "http://localhost:8083/product/{productId}";
 
     @Transactional
     @Override
@@ -52,6 +58,8 @@ public class OrderServiceImpl implements OrderService {
 
         order.setOrderItems(orderItems);
         order.setTotalOrderPrice(cart.getTotalPrice());
+        order.setStatus(OrderStatus.PENDING);
+        order.setUserId(userId);
 
         log.info("Save order");
         orderRepository.save(order);
@@ -71,6 +79,7 @@ public class OrderServiceImpl implements OrderService {
         return orderRepository.getAllOrdersByUserId(userId);
     }
 
+    @Transactional
     @Override
     public void deleteOrderItemFromOrder(Long orderItemId) {
         log.info("Get orderItem by id: {}", orderItemId);
@@ -79,5 +88,49 @@ public class OrderServiceImpl implements OrderService {
 
         log.info("Delete orderItem by id: {}", orderItemId);
         orderItemRepository.delete(orderItem);
+
+        Long orderId = orderItem.getOrder().getId();
+
+        log.info("Get order by id: {}", orderId);
+        Order order = orderRepository.findById(orderId)
+                        .orElseThrow(() -> new EntityNotFoundException("Order doesn't exist!"));
+
+        updateOrderTotalPrice(order);
+    }
+
+    @Override
+    public void addOrderItemToOrder(Long orderId, Long productId) {
+        log.info("Get order by id: {}", orderId);
+        Order order = orderRepository.findById(orderId)
+                .orElseThrow(() -> new EntityNotFoundException("Order doesn't exist!"));
+
+        ProductDTO product = restTemplate.getForObject(GET_PRODUCT_URL, ProductDTO.class, productId);
+
+        OrderItem orderItem = OrderItem.builder()
+                .order(order)
+                .productId(productId)
+                .totalOrderItemPrice(product.getPrice())
+                .amount(1)
+                .build();
+
+        log.info("Save orderItem to database");
+        orderItemRepository.save(orderItem);
+
+        updateOrderTotalPrice(order);
+    }
+
+    private Order updateOrderTotalPrice(Order order) {
+        Long orderId = order.getId();
+
+        log.info("Get all order items from order with id: {}", orderId);
+        List<OrderItem> orderItems = orderItemRepository.findAllItemsByOrderId(orderId);
+
+        Double totalPrice = orderItems.stream()
+                .map(OrderItem::getTotalOrderItemPrice)
+                .reduce(0.0, Double::sum);
+
+        order.setTotalOrderPrice(totalPrice);
+
+        return order;
     }
 }

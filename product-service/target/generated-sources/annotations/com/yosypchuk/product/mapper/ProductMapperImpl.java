@@ -11,8 +11,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-08-23T12:28:13+0300",
-    comments = "version: 1.5.1.Final, compiler: javac, environment: Java 11.0.13 (Amazon.com Inc.)"
+    date = "2022-09-28T19:39:04+0300",
+    comments = "version: 1.5.1.Final, compiler: javac, environment: Java 11.0.16.1 (Amazon.com Inc.)"
 )
 @Component
 public class ProductMapperImpl implements ProductMapper {
@@ -32,9 +32,9 @@ public class ProductMapperImpl implements ProductMapper {
             productDTO.categories( new ArrayList<ProductCategory>( list ) );
         }
         productDTO.description( product.getDescription() );
-        List<ProductReview> list1 = product.getRates();
+        List<ProductReview> list1 = product.getReviews();
         if ( list1 != null ) {
-            productDTO.rates( new ArrayList<ProductReview>( list1 ) );
+            productDTO.reviews( new ArrayList<ProductReview>( list1 ) );
         }
         productDTO.price( product.getPrice() );
         productDTO.amount( product.getAmount() );
@@ -57,9 +57,9 @@ public class ProductMapperImpl implements ProductMapper {
         if ( list != null ) {
             product.categories( new ArrayList<ProductCategory>( list ) );
         }
-        List<ProductReview> list1 = productDTO.getRates();
+        List<ProductReview> list1 = productDTO.getReviews();
         if ( list1 != null ) {
-            product.rates( new ArrayList<ProductReview>( list1 ) );
+            product.reviews( new ArrayList<ProductReview>( list1 ) );
         }
         product.price( productDTO.getPrice() );
         product.amount( productDTO.getAmount() );

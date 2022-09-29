@@ -22,7 +22,7 @@ public class ProductReview {
 
     @ManyToOne
     @JoinColumn(name = "product_id")
-    @JsonIgnoreProperties("rates")
+    @JsonIgnoreProperties("reviews")
     @JsonIgnore
     private Product product;
 
@@ -32,12 +32,12 @@ public class ProductReview {
     @Column(name = "rate", nullable = false)
     private Integer rate;
 
-    @Column(name = "comment", nullable = false, length = 1024)
+    @Column(name = "comment", nullable = false)
     private String comment;
 
-    @Column(name = "comment", nullable = false, length = 256)
+    @Column(name = "pros", nullable = false)
     private String pros;
 
-    @Column(name = "comment", nullable = false, length = 256)
+    @Column(name = "cons", nullable = false)
     private String cons;
 }

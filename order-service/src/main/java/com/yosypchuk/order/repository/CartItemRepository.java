@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Repository
 public interface CartItemRepository extends JpaRepository<CartItem, Long> {
 
@@ -14,4 +16,7 @@ public interface CartItemRepository extends JpaRepository<CartItem, Long> {
     @Query("DELETE FROM CartItem ci WHERE ci.cart.id=?1")
     @Transactional
     void deleteAllCartItemsByCartId(Long cartId);
+
+    @Query("SELECT ci FROM CartItem ci WHERE ci.cart.id=?1")
+    List<CartItem> findAllItemsByCartId(Long cartId);
 }

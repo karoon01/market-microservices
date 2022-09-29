@@ -66,13 +66,16 @@ public class ProductReviewServiceImpl implements ProductReviewService {
     }
 
     @Override
-    public Double getAverageRate(Long productId) {
-        log.info("Get all rates for product with id: {}", productId);
-        List<ProductReview> rates = productRateRepository.getAllByProductId(productId);
+    public void deleteReview(Long userId, Long productId) {
+        log.info("Get product by id: {}", productId);
+        Product product = productRepository.findById(productId)
+                .orElseThrow(() -> new EntityNotFoundException("Product doesn't exist!"));
 
-        return rates.stream()
-                .mapToDouble(ProductReview::getRate)
-                .average()
-                .getAsDouble();
+        log.info("Get product with user id: {} and product id: {}", userId, productId);
+        ProductReview productReview = productRateRepository.findProductRateByUserIdAndProductId(userId, productId)
+                .orElseThrow(() -> new EntityNotFoundException("Product rate doesn't exist!"));
+
+        log.info("Remove product rate for product with id: {} from user: {}", productId, userId);
+        productRateRepository.delete(productReview);
     }
 }

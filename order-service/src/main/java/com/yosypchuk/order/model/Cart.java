@@ -1,5 +1,6 @@
 package com.yosypchuk.order.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,6 +21,7 @@ public class Cart {
     private Long id;
 
     @OneToMany(mappedBy = "cart")
+    @JsonIgnoreProperties("cart")
     private List<CartItem> cartItems;
 
     @Column(name = "user_id", nullable = false)

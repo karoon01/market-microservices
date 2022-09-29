@@ -25,6 +25,7 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
 
+    @Transactional
     @Override
     public UserDTO createUser(UserDTO userBody) {
         String email = userBody.getEmail();

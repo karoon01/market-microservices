@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="config-server" />
         <module name="authentication-service" />
+        <module name="euruka-server" />
         <module name="api-gateway" />
         <module name="order-service" />
         <module name="mail-service" />
@@ -31,6 +32,7 @@
     <bytecodeTargetLevel>
       <module name="auth-service" target="11" />
       <module name="open-feign-client" target="11" />
+      <module name="payment-service" target="11" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
@@ -40,6 +42,7 @@
       <module name="authentication-service" options="-parameters" />
       <module name="config-server" options="-parameters" />
       <module name="eureka-server" options="-parameters" />
+      <module name="euruka-server" options="-parameters" />
       <module name="mail-service" options="-parameters" />
       <module name="open-feign-client" options="-parameters" />
       <module name="order-service" options="-parameters" />

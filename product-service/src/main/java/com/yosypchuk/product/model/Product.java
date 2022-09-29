@@ -36,7 +36,7 @@ public class Product {
 
     @OneToMany(mappedBy = "product")
     @JsonIgnoreProperties("product")
-    private List<ProductReview> rates;
+    private List<ProductReview> reviews;
 
     @Column(name = "price", nullable = false)
     private Double price;

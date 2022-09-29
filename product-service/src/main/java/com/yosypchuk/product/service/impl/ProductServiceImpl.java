@@ -73,7 +73,7 @@ public class ProductServiceImpl implements ProductService {
                 .name(productDTO.getName())
                 .description(productDTO.getDescription())
                 .categories(productDTO.getCategories())
-                .rates(productDTO.getRates())
+                .reviews(productDTO.getReviews())
                 .price(productDTO.getPrice())
                 .amount(productDTO.getAmount())
                 .build();

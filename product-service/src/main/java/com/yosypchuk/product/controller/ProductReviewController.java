@@ -24,4 +24,10 @@ public class ProductReviewController implements ProductReviewApi {
         productRateService.changeReview(userId, productId, productRateDTO);
         return ResponseEntity.noContent().build();
     }
+
+    @Override
+    public ResponseEntity<Void> deleteProductReview(Long userId, Long productId) {
+        productRateService.deleteReview(userId, productId);
+        return ResponseEntity.noContent().build();
+    }
 }

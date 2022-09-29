@@ -3,7 +3,10 @@ package com.yosypchuk.order.service.impl;
 import com.yosypchuk.order.exception.EntityAlreadyExistException;
 import com.yosypchuk.order.exception.EntityNotFoundException;
 import com.yosypchuk.order.model.Cart;
+import com.yosypchuk.order.model.CartItem;
+import com.yosypchuk.order.repository.CartItemRepository;
 import com.yosypchuk.order.repository.CartRepository;
+import com.yosypchuk.order.service.CartItemService;
 import com.yosypchuk.order.service.CartService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -11,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -19,6 +23,7 @@ import java.util.Optional;
 public class CartServiceImpl implements CartService {
 
     private final CartRepository cartRepository;
+    private final CartItemRepository cartItemRepository;
 
     @Transactional
     @Override
@@ -35,6 +40,7 @@ public class CartServiceImpl implements CartService {
         Cart cart = Cart.builder()
                 .cartItems(Collections.emptyList())
                 .userId(userId)
+                .totalPrice(0.0)
                 .build();
 
         log.info("Create cart for user with id: {}", userId);
@@ -46,7 +52,6 @@ public class CartServiceImpl implements CartService {
     @Override
     public Cart getCartByUserId(Long userId) {
         log.info("Get cart by user id: {}", userId);
-
         return cartRepository.findCartByUserId(userId)
                 .orElseThrow(() -> new EntityNotFoundException("Cart doesn't exist!"));
     }
@@ -54,7 +59,6 @@ public class CartServiceImpl implements CartService {
     @Override
     public Cart getCartById(Long id) {
         log.info("Get cart by id: {}", id);
-
         return cartRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Cart doesn't exist!"));
     }

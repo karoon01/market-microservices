@@ -17,16 +17,25 @@ public interface ProductReviewApi {
 
     @ApiOperation("Create product rate")
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping("/{userId}")
+    @PostMapping("/{userId}/{productId}")
     @ApiResponse(code = 201, message = "Created")
     ResponseEntity<Void> createProductReview(@PathVariable Long userId, @PathVariable Long productId, @RequestBody @Valid ProductRateDTO productRateDTO);
 
     @ApiOperation("Update product rate")
     @ResponseStatus(HttpStatus.OK)
-    @PutMapping("/{userId}")
+    @PutMapping("/{userId}/{productId}")
     @ApiResponses({
             @ApiResponse(code = 200, message = "OK"),
             @ApiResponse(code = 404, message = "Not Found")
     })
     ResponseEntity<Void> updateProductReview(@PathVariable Long userId, @PathVariable Long productId, @RequestBody @Valid ProductRateDTO productRateDTO);
+
+    @ApiOperation("Delete product rate")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    @DeleteMapping("/{userId}/{productId}")
+    @ApiResponses({
+            @ApiResponse(code = 202, message = "Accepted"),
+            @ApiResponse(code = 404, message = "Not Found")
+    })
+    ResponseEntity<Void> deleteProductReview(@PathVariable Long userId, @PathVariable Long productId);
 }

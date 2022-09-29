@@ -8,6 +8,5 @@ public interface ProductReviewService {
 
     void changeReview(Long userId, Long productId, ProductRateDTO productRateDTO);
 
-    Double getAverageRate(Long productId);
-
+    void deleteReview(Long userId, Long productId);
 }

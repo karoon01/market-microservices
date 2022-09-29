@@ -39,8 +39,21 @@ public interface OrderApi {
     })
     List<Order> getAllUserOrders(@PathVariable Long userId);
 
+    @ApiOperation("Add order item to order")
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("/{orderId}/add/{productId}")
+    @ApiResponses({
+            @ApiResponse(code = 201, message = "Created"),
+            @ApiResponse(code = 404, message = "Not Found")
+    })
+    ResponseEntity<Void> addOrderItemToOrder(@PathVariable Long orderId, @PathVariable Long productId);
+
     @ApiOperation("Delete order item from order")
     @ResponseStatus(HttpStatus.ACCEPTED)
     @DeleteMapping("/{orderItemId}/delete")
+    @ApiResponses({
+            @ApiResponse(code = 404, message = "Not Found"),
+            @ApiResponse(code = 202, message = "Accepted")
+    })
     ResponseEntity<Void> deleteOrderItemFromOrder(@PathVariable Long orderItemId);
 }

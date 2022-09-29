@@ -1,5 +1,6 @@
 package com.yosypchuk.order.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,6 +21,7 @@ public class CartItem {
 
     @ManyToOne
     @JoinColumn(name = "user_cart_id")
+    @JsonIgnoreProperties("cartItems")
     private Cart cart;
 
     @Column(name = "product_id", nullable = false)

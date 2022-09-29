@@ -28,7 +28,7 @@ public class ProductDTO {
     @NotBlank(message = "${product.description.not-blank}")
     private String description;
 
-    private List<ProductReview> rates;
+    private List<ProductReview> reviews;
 
     @Min(value = 0, message = "${product.price.positive}")
     private Double price;
