@@ -1,7 +1,6 @@
 package com.yosypchuk.wishlist.api;
 
 import com.yosypchuk.wishlist.model.Wishlist;
-import com.yosypchuk.wishlist.model.dto.WishlistItemRequest;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -30,13 +29,13 @@ public interface WishlistApi {
     Wishlist getWishlistByUserId(@PathVariable Long userId);
 
     @ApiOperation("Add product to wishlist")
-    @ResponseStatus(HttpStatus.OK)
-    @PostMapping("/{userId}/add")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    @PostMapping("/{userId}/add/{productId}")
     @ApiResponses({
-            @ApiResponse(code = 200, message = "OK"),
+            @ApiResponse(code = 201, message = "Accepted"),
             @ApiResponse(code = 409, message = "Conflict")
     })
-    ResponseEntity<Void> addProductToWishlist(@PathVariable Long userId, @RequestBody WishlistItemRequest wishlistItemRequest);
+    ResponseEntity<Void> addProductToWishlist(@PathVariable Long userId, @PathVariable Long productId);
 
     @ApiOperation("Remove product from wishlist")
     @ResponseStatus(HttpStatus.ACCEPTED)

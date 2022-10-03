@@ -45,18 +45,14 @@ public class WishlistServiceImpl implements WishlistService {
     @Override
     public Wishlist getWishlistByUserId(Long userId) {
         log.info("Get wishlist for user with id: {}", userId);
-        Wishlist wishlist = wishlistRepository.findWishlistByUserId(userId)
+        return wishlistRepository.findWishlistByUserId(userId)
                 .orElse(null);
-
-        return wishlist;
     }
 
     @Override
     public Wishlist getWishlistById(Long wishlistId) {
         log.info("Get wishlist by id: {}", wishlistId);
-        Wishlist wishlist = wishlistRepository.findById(wishlistId)
+        return wishlistRepository.findById(wishlistId)
                 .orElseThrow(() -> new EntityNotFoundException("Wishlist doesn't exist!"));
-
-        return wishlist;
     }
 }

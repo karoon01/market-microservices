@@ -1,6 +1,7 @@
 package com.yosypchuk.product.api;
 
 import com.yosypchuk.product.model.dto.ProductCategoryDTO;
+import com.yosypchuk.product.model.dto.ProductDTO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -57,4 +58,13 @@ public interface ProductCategoryApi {
             @ApiResponse(code = 404, message = "Not Found")
     })
     ResponseEntity<Void> removeCategoryFromProduct(@PathVariable Long productId, @PathVariable Long categoryId);
+
+    @ApiOperation("Get all products by category")
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/{categoryId}/products")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "OK"),
+            @ApiResponse(code = 404, message = "Not Found")
+    })
+    List<ProductDTO> getAllProductsByCategory(@PathVariable Long categoryId);
 }

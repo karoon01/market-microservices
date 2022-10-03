@@ -2,6 +2,7 @@ package com.yosypchuk.product.controller;
 
 import com.yosypchuk.product.api.ProductCategoryApi;
 import com.yosypchuk.product.model.dto.ProductCategoryDTO;
+import com.yosypchuk.product.model.dto.ProductDTO;
 import com.yosypchuk.product.service.ProductCategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -41,5 +42,10 @@ public class ProductCategoryController implements ProductCategoryApi {
     public ResponseEntity<Void> removeCategoryFromProduct(Long productId, Long categoryId) {
         productCategoryService.removeCategoryFromProduct(productId, categoryId);
         return ResponseEntity.noContent().build();
+    }
+
+    @Override
+    public List<ProductDTO> getAllProductsByCategory(Long categoryId) {
+        return productCategoryService.getAllProductByCategoryId(categoryId);
     }
 }

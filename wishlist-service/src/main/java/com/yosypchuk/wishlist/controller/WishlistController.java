@@ -2,7 +2,6 @@ package com.yosypchuk.wishlist.controller;
 
 import com.yosypchuk.wishlist.api.WishlistApi;
 import com.yosypchuk.wishlist.model.Wishlist;
-import com.yosypchuk.wishlist.model.dto.WishlistItemRequest;
 import com.yosypchuk.wishlist.service.WishlistItemService;
 import com.yosypchuk.wishlist.service.WishlistService;
 import lombok.RequiredArgsConstructor;
@@ -27,8 +26,8 @@ public class WishlistController implements WishlistApi {
     }
 
     @Override
-    public ResponseEntity<Void> addProductToWishlist(Long userId, WishlistItemRequest wishlistItemRequest) {
-        wishlistItemService.addWishlistItem(userId, wishlistItemRequest);
+    public ResponseEntity<Void> addProductToWishlist(Long userId, Long productId) {
+        wishlistItemService.addWishlistItem(userId, productId);
         return ResponseEntity.noContent().build();
     }
 

@@ -4,7 +4,6 @@ import com.yosypchuk.wishlist.exception.EntityAlreadyExistException;
 import com.yosypchuk.wishlist.exception.EntityNotFoundException;
 import com.yosypchuk.wishlist.model.Wishlist;
 import com.yosypchuk.wishlist.model.WishlistItem;
-import com.yosypchuk.wishlist.model.dto.WishlistItemRequest;
 import com.yosypchuk.wishlist.repository.WishlistItemRepository;
 import com.yosypchuk.wishlist.service.WishlistItemService;
 import com.yosypchuk.wishlist.service.WishlistService;
@@ -23,9 +22,7 @@ public class WishlistItemServiceImpl implements WishlistItemService {
 
     @Transactional
     @Override
-    public void addWishlistItem(Long userId, WishlistItemRequest wishlistItemRequest) {
-        Long productId = wishlistItemRequest.getProductId();
-
+    public void addWishlistItem(Long userId, Long productId) {
         log.info("Get wishlist by user id: {}", userId);
         Wishlist wishlist = wishlistService.getWishlistByUserId(userId);
 

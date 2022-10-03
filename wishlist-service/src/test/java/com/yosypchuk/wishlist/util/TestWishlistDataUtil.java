@@ -5,12 +5,13 @@ import com.yosypchuk.wishlist.model.WishlistItem;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
+import java.util.Collections;
 import java.util.List;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class TestWishlistDataUtil {
     public static Long MOCK_ID = 1L;
-    public static List<WishlistItem> MOCK_WISHLIST_ITEMS = List.of();
+    public static List<WishlistItem> MOCK_WISHLIST_ITEMS = Collections.emptyList();
     public static Long MOCK_USER_ID = 1L;
 
     public static Wishlist createWishlist() {
